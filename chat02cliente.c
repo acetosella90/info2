@@ -6,6 +6,8 @@
 #include <string.h>
 #include <stdlib.h>
  
+// luis se la come
+
 int main()
 {
 	struct sockaddr_in server ;
