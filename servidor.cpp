@@ -73,8 +73,8 @@ int main()
 			break;
 		}
 	}
-	close(sock1);
-	close(sock2);
+	//close(sock1);
+	//close(sock2);
 	return 0;
 
 }

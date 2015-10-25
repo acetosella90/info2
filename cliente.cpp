@@ -56,5 +56,5 @@ int main()
 		}
 		printf("Servidor: %s\n",reci);
 	}
-	close(sock1);
+	//close(sock1);
 }
