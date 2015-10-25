@@ -16,14 +16,39 @@ int main(void){
 	system("clear");
 
 	int coord[2];
+	char letra;
 	int numBarcos = 3;
 
+	printf("");
 	iniciarTablero();
 
 	for(numBarcos = 0 ; numBarcos < 3 ; numBarcos++){
 		mostrarTablero();
-		printf("Ingrese BARCO N° %d de 3: \nLETRA: ", numBarcos+1);
-		scanf("%d",&coord[0]);
+		printf("Ingrese BARCO N° %d de 3: \nLETRA(minuscula): ", numBarcos+1);
+		scanf("%c", &letra);
+		
+		switch(letra){
+		    case 'a'  :
+		       coord[0] = 0;
+		       break; 
+		    case 'b'  :
+		       coord[0] = 1;
+		       break;
+		    case 'c'  :
+		       coord[0] = 2;
+		       break; 
+		    case 'd'  :
+		       coord[0] = 3;
+		       break; 
+		    case 'e'  :
+		       coord[0] = 4;
+		       break;
+		    default :
+		    	coord[0] = 1;
+
+
+		}
+		
 		printf("NUMERO: ");
 		scanf("%d",&coord[1]);
 		ingresoBarcos(coord);
@@ -37,8 +62,8 @@ void iniciarTablero(){
 
 	int i, j;
 
-	for( i = 0 ; i < FILMAX ; i++ )
-		for( j = 0 ; j < COLMAX ; j++)
+	for( i = 0 ; i < COLMAX ; i++ )
+		for( j = 0 ; j < FILMAX ; j++)
 			tablero[i][j] = '0' ;
 }
 
@@ -49,15 +74,21 @@ void mostrarTablero(){
 	printf("\n");
 	printf("     Tablero de Matias\n\n");
 	printf("     A   B   C   D   E\n");
-	printf("   +--------------------");
+	printf("   +---+---+---+---+---+");
 
-	for( i = 0 ; i < FILMAX ; i++ ){
+	for( i = 0 ; i < COLMAX ; i++ ){
 		if(i > 0)
-			printf("\n   ---------------------");
+			printf("\n   +---+---+---+---+---+");
 		printf("\n %d |", i+1);
-		for( j = 0 ; j < COLMAX ; j++)
-			printf(" %c |", tablero[i][j]);
+		for( j = 0 ; j < FILMAX ; j++)
+			if(tablero[i][j] == 'X')
+				printf("\x1b[31m X \x1b[0m|"); // printf("\x1b[34m X \x1b[0m|");
+
+			else
+				printf(" %c |", tablero[i][j]);
 	}
+    printf("\n");
+	printf("   +---+---+---+---+---+");
 	printf("\n\n");
 }
 
@@ -65,7 +96,7 @@ void ingresoBarcos(int coord []){
 
 	int i, j;
 
-	for( i = 0 ; i < FILMAX ; i++ )
-		for( j = 0 ; j < COLMAX ; j++)
-			tablero[coord[0]][coord[1]] = 'X' ;
+	for( i = 0 ; i < COLMAX ; i++ )
+		for( j = 0 ; j < FILMAX ; j++)
+			tablero[coord[0]][coord[1]-1] = 'X' ;
 }
