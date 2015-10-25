@@ -26,6 +26,7 @@ int main(void){
 		mostrarTablero();
 		printf("Ingrese BARCO N° %d de 3: \nLETRA(minuscula): ", numBarcos+1);
 		scanf("%c", &letra);
+		while(getchar()!='\n');
 		
 		switch(letra){
 		    case 'a'  :
