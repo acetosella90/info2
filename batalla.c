@@ -16,19 +16,18 @@ int main(void){
 	system("clear");
 
 	int coord[2];
-	char letra;
+	char letra[2];
 	int numBarcos = 3;
 
-	printf("");
 	iniciarTablero();
 
 	for(numBarcos = 0 ; numBarcos < 3 ; numBarcos++){
 		mostrarTablero();
 		printf("Ingrese BARCO N° %d de 3: \nLETRA(minuscula): ", numBarcos+1);
-		scanf("%c", &letra);
-		while(getchar()!='\n');
 		
-		switch(letra){
+		scanf("%s", letra);
+		
+		switch(letra[0]){
 		    case 'a'  :
 		       coord[0] = 0;
 		       break; 
@@ -44,17 +43,13 @@ int main(void){
 		    case 'e'  :
 		       coord[0] = 4;
 		       break;
-		    default :
-		    	coord[0] = 1;
-
-
 		}
-		
+
 		printf("NUMERO: ");
 		scanf("%d",&coord[1]);
 		ingresoBarcos(coord);
 	}
-	
+	mostrarTablero();
 
 	return 0;
 }
@@ -63,8 +58,8 @@ void iniciarTablero(){
 
 	int i, j;
 
-	for( i = 0 ; i < COLMAX ; i++ )
-		for( j = 0 ; j < FILMAX ; j++)
+	for( i = 0 ; i < FILMAX ; i++ )
+		for( j = 0 ; j < COLMAX ; j++)
 			tablero[i][j] = '0' ;
 }
 
@@ -77,11 +72,11 @@ void mostrarTablero(){
 	printf("     A   B   C   D   E\n");
 	printf("   +---+---+---+---+---+");
 
-	for( i = 0 ; i < COLMAX ; i++ ){
+	for( i = 0 ; i < FILMAX ; i++ ){
 		if(i > 0)
 			printf("\n   +---+---+---+---+---+");
 		printf("\n %d |", i+1);
-		for( j = 0 ; j < FILMAX ; j++)
+		for( j = 0 ; j < COLMAX ; j++)
 			if(tablero[i][j] == 'X')
 				printf("\x1b[31m X \x1b[0m|"); // printf("\x1b[34m X \x1b[0m|");
 
@@ -97,7 +92,7 @@ void ingresoBarcos(int coord []){
 
 	int i, j;
 
-	for( i = 0 ; i < COLMAX ; i++ )
-		for( j = 0 ; j < FILMAX ; j++)
-			tablero[coord[0]][coord[1]-1] = 'X' ;
+	for( i = 0 ; i < FILMAX ; i++ )
+		for( j = 0 ; j < COLMAX ; j++)
+			tablero[(coord[1]-1)][coord[0]] = 'X' ;
 }
